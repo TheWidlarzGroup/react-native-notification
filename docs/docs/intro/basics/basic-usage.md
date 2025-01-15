@@ -44,6 +44,8 @@ const notificationMetadata = notify('success', {
     description: 'Wow, that was easy',
   },
 })
+// or
+const notificationMetadata = notify('success', 'Hello', 'Wow, that was easy')
 ```
 
 ### 🔨 Modify notification

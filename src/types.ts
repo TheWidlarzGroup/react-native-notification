@@ -48,10 +48,37 @@ export type Modify = (id: string, params: Partial<ModifiedEmitParam>) => void
 
 export type Remove = (id: string) => void
 
-export type Notify<V extends VariantsMap = Variants> = <Variant extends keyof V>(
-  notificationType: Variant,
-  setup: { params: RequiredProps<V[Variant]>; config?: Partial<NotificationConfigBase> }
-) => { id: string }
+export type Setup<V extends Variant<VFC<any>>> = {
+  params: RequiredProps<V>
+  config?: Partial<NotificationConfigBase>
+}
+
+export type Notify<V extends VariantsMap = Variants> = {
+  // Overload for (notificationType, title)
+  <Variant extends keyof V>(notificationType: Variant, title: string): { id: string }
+
+  // Overload for (notificationType, title, description)
+  <Variant extends keyof V>(notificationType: Variant, title: string, description: string): {
+    id: string
+  }
+
+  // Overload for (notificationType, title, setup)
+  <Variant extends keyof V>(notificationType: Variant, title: string, setup: Setup<V[Variant]>): {
+    id: string
+  }
+
+  // Overload for (notificationType, title, description, setup)
+  <Variant extends keyof V>(
+    notificationType: Variant,
+    title: string,
+    description: string,
+    test: V[Variant],
+    setup: Setup<V[Variant]>
+  ): { id: string }
+
+  // Overload for (notificationType, setup)
+  <Variant extends keyof V>(notificationType: Variant, setup: Setup<V[Variant]>): { id: string }
+}
 
 export type UseNotification<V extends VariantsMap = Variants> = () => Emmiter<V>
 

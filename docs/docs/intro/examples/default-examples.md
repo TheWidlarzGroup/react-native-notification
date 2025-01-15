@@ -39,32 +39,18 @@ export const DefaultExamples = () => {
       <SuccessButton
         onPress={() =>
           setId(
-            notify('success', {
-              params: {
-                description: 'This is where the toast text goes',
-                title: 'Success',
-              },
-            }).id
+            notify('success', 'Success', 'This is where the toast text goes').id
           )
         }
       />
       <ErrorButton
         onPress={() =>
-          notify('error', {
-            params: {
-              description: 'This is where the toast text goes. ',
-              title: 'Error',
-            },
-          })
+          notify('error', 'Error', 'This is where the toast text goes')
         }
       />
       <WarningButton
         onPress={() =>
-          notify('warning', {
-            params: {
-              description: 'This is where the toast text goes',
-              title: 'Warning',
-            },
+          notify('warning', 'Warning', 'This is where the toast text goes', {
             config: {
               notificationPosition: 'center',
             },
@@ -73,12 +59,7 @@ export const DefaultExamples = () => {
       />
       <InfoButton
         onPress={() =>
-          notify('info', {
-            params: {
-              description: 'This is where the toast text goes.',
-              title: 'Info',
-            },
-          })
+          notify('info', 'Info', 'This is where the toast text goes.')
         }
       />
       <ModifyButton
@@ -148,12 +129,7 @@ If you need more info on how those methods works please check the [BASIC USAGE](
 As we said above, we trigger every notification by pressing the button. All we need to pass to the `onPress` event is:
 
 ```typescript jsx
-() => notify('error', {
-                params: {
-                    description: 'This is where the toast text goes. ',
-                    title: 'Error',
-                },
-            })
+() => notify('error', 'Error', 'This is where the toast text goes.')
  ```
 
 First argument is a notification type (`success/error/info/warning`) and the second is an object with settings, consisting of the two parts: `params` and `config` (check [Single Notification Config](../default-variants-config/props-config.md)).<br/>
